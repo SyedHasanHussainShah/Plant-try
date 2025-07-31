@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantDoctor - AI-Powered Plant Care</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="logo-container">
+                <i class="fas fa-leaf logo-icon"></i>
+                <h1 class="app-title">PlantDoctor</h1>
+                <p class="app-subtitle">AI-Powered Plant Care</p>
+            </div>
+            <div class="loading-animation">
+                <div class="plant-growing">
+                    <div class="stem"></div>
+                    <div class="leaves">
+                        <div class="leaf leaf-1"></div>
+                        <div class="leaf leaf-2"></div>
+                        <div class="leaf leaf-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="main-app" class="main-app hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>PlantDoctor</span>
+                </div>
+                <nav class="nav">
+                    <button class="nav-btn active" data-section="scan">
+                        <i class="fas fa-camera"></i>
+                        <span>Scan</span>
+                    </button>
+                    <button class="nav-btn" data-section="history">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </button>
+                    <button class="nav-btn" data-section="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Scan Section -->
+            <section id="scan-section" class="section active">
+                <div class="scan-container">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <h2>Identify Your Plant</h2>
+                            <p>Take a photo or upload an image to get AI-powered analysis</p>
+                            <div class="upload-buttons">
+                                <button class="btn btn-primary" id="camera-btn">
+                                    <i class="fas fa-camera"></i>
+                                    Take Photo
+                                </button>
+                                <button class="btn btn-secondary" id="gallery-btn">
+                                    <i class="fas fa-images"></i>
+                                    Choose from Gallery
+                                </button>
+                            </div>
+                        </div>
+                        <input type="file" id="file-input" accept="image/*" hidden>
+                    </div>
+
+                    <!-- Camera Interface -->
+                    <div id="camera-interface" class="camera-interface hidden">
+                        <div class="camera-container">
+                            <video id="camera-feed" autoplay playsinline></video>
+                            <canvas id="camera-canvas" hidden></canvas>
+                            <div class="camera-overlay">
+                                <div class="focus-frame"></div>
+                                <div class="camera-controls">
+                                    <button class="btn btn-secondary" id="switch-camera">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                    <button class="btn btn-primary" id="capture-btn">
+                                        <i class="fas fa-circle"></i>
+                                    </button>
+                                    <button class="btn btn-secondary" id="close-camera">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Section -->
+                    <div id="analysis-section" class="analysis-section hidden">
+                        <div class="analysis-header">
+                            <h2>Analyzing Your Plant</h2>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-fill"></div>
+                                </div>
+                                <span class="progress-text" id="progress-text">Processing...</span>
+                            </div>
+                        </div>
+                        <div class="analysis-steps">
+                            <div class="step active" data-step="1">
+                                <i class="fas fa-search"></i>
+                                <span>Identifying plant species</span>
+                            </div>
+                            <div class="step" data-step="2">
+                                <i class="fas fa-bug"></i>
+                                <span>Detecting diseases & pests</span>
+                            </div>
+                            <div class="step" data-step="3">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Generating care prescription</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="section hidden">
+                <div class="results-container">
+                    <div class="results-header">
+                        <button class="btn btn-secondary" id="back-to-scan">
+                            <i class="fas fa-arrow-left"></i>
+                            New Scan
+                        </button>
+                        <h2>Analysis Results</h2>
+                    </div>
+
+                    <div class="results-content">
+                        <div class="plant-info">
+                            <div class="plant-image">
+                                <img id="result-image" src="" alt="Plant">
+                                <div class="confidence-badge" id="confidence-badge">
+                                    <span id="confidence-score">95%</span>
+                                </div>
+                            </div>
+                            <div class="plant-details">
+                                <h3 id="plant-name">Rose (Rosa)</h3>
+                                <p id="plant-scientific">Rosa sp.</p>
+                                <div class="plant-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-leaf"></i>
+                                        <span>Healthy</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-sun"></i>
+                                        <span>Full Sun</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-tint"></i>
+                                        <span>Moderate Water</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="diagnosis-section">
+                            <h3>Diagnosis</h3>
+                            <div class="diagnosis-content" id="diagnosis-content">
+                                <!-- Diagnosis will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="prescription-section">
+                            <h3>Care Prescription</h3>
+                            <div class="prescription-content" id="prescription-content">
+                                <!-- Prescription will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" id="save-result">
+                                <i class="fas fa-save"></i>
+                                Save to History
+                            </button>
+                            <button class="btn btn-secondary" id="share-result">
+                                <i class="fas fa-share"></i>
+                                Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section id="history-section" class="section hidden">
+                <div class="history-container">
+                    <h2>Scan History</h2>
+                    <div class="history-list" id="history-list">
+                        <!-- History items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Section -->
+            <section id="community-section" class="section hidden">
+                <div class="community-container">
+                    <h2>Plant Care Community</h2>
+                    <div class="community-content">
+                        <div class="forum-preview">
+                            <h3>Recent Discussions</h3>
+                            <div class="forum-posts">
+                                <div class="forum-post">
+                                    <div class="post-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="post-content">
+                                        <h4>Help with my Monstera</h4>
+                                        <p>My Monstera leaves are turning yellow. Any advice?</p>
+                                        <div class="post-meta">
+                                            <span>2 hours ago</span>
+                                            <span>5 replies</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="forum-post">
+                                    <div class="post-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="post-content">
+                                        <h4>Best fertilizer for succulents?</h4>
+                                        <p>Looking for organic fertilizer recommendations.</p>
+                                        <div class="post-meta">
+                                            <span>1 day ago</span>
+                                            <span>12 replies</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="community-actions">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-plus"></i>
+                                Start Discussion
+                            </button>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-search"></i>
+                                Search Topics
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <i class="toast-icon"></i>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

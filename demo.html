@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantDoctor Demo - Testing Guide</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #4ade80;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .feature-card h3 {
+            color: #4ade80;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            margin: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .test-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+        .test-section h3 {
+            color: #4ade80;
+            margin-bottom: 1rem;
+        }
+        .test-steps {
+            list-style: none;
+            padding: 0;
+        }
+        .test-steps li {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        .test-steps li::before {
+            content: "✅ ";
+            color: #4ade80;
+        }
+        .warning {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        .success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 PlantDoctor Demo & Testing Guide</h1>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>📸 Camera Integration</h3>
+                <p>Test the camera functionality by clicking "Take Photo" in the main app. This requires HTTPS for full functionality.</p>
+                <a href="index.html" class="btn">Test Camera</a>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📁 File Upload</h3>
+                <p>Test file upload by selecting images from your device gallery or dragging and dropping files.</p>
+                <a href="index.html" class="btn">Test Upload</a>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🤖 AI Analysis</h3>
+                <p>Experience the AI analysis simulation with real-time progress tracking and step-by-step updates.</p>
+                <a href="index.html" class="btn">Test Analysis</a>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📊 Results Display</h3>
+                <p>View detailed plant identification, disease detection, and care prescriptions with confidence scores.</p>
+                <a href="index.html" class="btn">View Results</a>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🧪 Testing Checklist</h3>
+            <ol class="test-steps">
+                <li><strong>Splash Screen:</strong> Verify the 3-second loading animation with growing plant</li>
+                <li><strong>Navigation:</strong> Test switching between Scan, History, and Community tabs</li>
+                <li><strong>Camera Access:</strong> Grant permissions and test photo capture (HTTPS required)</li>
+                <li><strong>File Upload:</strong> Test gallery selection and drag & drop functionality</li>
+                <li><strong>Analysis Progress:</strong> Watch the 3-step analysis process with progress bar</li>
+                <li><strong>Results Display:</strong> Check plant identification, diagnosis, and prescription</li>
+                <li><strong>History Management:</strong> Save results and view them in the History tab</li>
+                <li><strong>Responsive Design:</strong> Test on different screen sizes and orientations</li>
+                <li><strong>Toast Notifications:</strong> Verify success and error message displays</li>
+                <li><strong>Share Functionality:</strong> Test native sharing or clipboard fallback</li>
+            </ol>
+        </div>
+
+        <div class="test-section">
+            <h3>🚀 Quick Start</h3>
+            <div class="success">
+                <strong>Option 1: Python Server (Recommended)</strong><br>
+                <code>python server.py --https</code><br>
+                Then visit: <code>https://localhost:8000</code>
+            </div>
+            
+            <div class="success">
+                <strong>Option 2: Node.js Server</strong><br>
+                <code>npm start</code><br>
+                Then visit: <code>http://localhost:8000</code>
+            </div>
+            
+            <div class="warning">
+                <strong>⚠️ Important:</strong> Camera functionality requires HTTPS. Use the --https flag with Python server or start:https with npm.
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>📱 Mobile Testing</h3>
+            <p>For the best experience, test on a mobile device or use browser developer tools to simulate mobile view:</p>
+            <ul>
+                <li>Open browser developer tools (F12)</li>
+                <li>Click the device toggle button</li>
+                <li>Select a mobile device (iPhone, Android, etc.)</li>
+                <li>Test touch interactions and responsive layout</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h3>🔧 Troubleshooting</h3>
+            <div class="warning">
+                <strong>Camera not working?</strong><br>
+                - Ensure you're using HTTPS<br>
+                - Grant camera permissions when prompted<br>
+                - Try the gallery upload as an alternative
+            </div>
+            
+            <div class="warning">
+                <strong>Images not loading?</strong><br>
+                - Check browser console for errors<br>
+                - Ensure all files are in the same directory<br>
+                - Try refreshing the page
+            </div>
+            
+            <div class="warning">
+                <strong>Server not starting?</strong><br>
+                - Check if port 8000 is available<br>
+                - Try a different port: <code>python server.py --port 8080</code><br>
+                - Ensure Python 3.6+ is installed
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="index.html" class="btn" style="font-size: 1.2rem; padding: 1rem 2rem;">
+                🚀 Launch PlantDoctor
+            </a>
+        </div>
+    </div>
+</body>
+</html>

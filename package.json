@@ -1,0 +1,55 @@
+{
+  "name": "plantdoctor",
+  "version": "1.0.0",
+  "description": "AI-Powered Plant Disease Detection & Care App",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -p 8000",
+    "start:https": "npx serve . -p 8000 --ssl-cert plantdoctor.crt --ssl-key plantdoctor.key",
+    "dev": "npx live-server --port=8000 --open=/",
+    "build": "echo 'PlantDoctor is a static web app - no build step required'",
+    "test": "echo 'No tests specified'",
+    "lint": "npx eslint script.js",
+    "format": "npx prettier --write *.js *.css *.html"
+  },
+  "keywords": [
+    "plant",
+    "disease",
+    "detection",
+    "ai",
+    "machine-learning",
+    "camera",
+    "identification",
+    "care",
+    "health",
+    "botany"
+  ],
+  "author": "PlantDoctor Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/plantdoctor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/plantdoctor/issues"
+  },
+  "homepage": "https://github.com/yourusername/plantdoctor#readme",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.8.0",
+    "serve": "^14.0.0",
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "dependencies": {},
+  "optionalDependencies": {
+    "openssl": "^1.1.0"
+  }
+}
