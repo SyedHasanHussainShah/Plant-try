@@ -87,14 +87,14 @@ class PlantDoctor {
                     height: { ideal: 1080 }
                 } 
             });
-            
             this.cameraStream = stream;
             const video = document.getElementById('camera-feed');
             video.srcObject = stream;
-            
+            video.onloadedmetadata = () => {
+                video.play();
+            };
             document.getElementById('camera-interface').classList.remove('hidden');
             document.getElementById('scan-section').classList.add('hidden');
-            
         } catch (error) {
             this.showToast('Camera access denied. Please use gallery upload instead.', 'error');
         }
@@ -140,15 +140,18 @@ class PlantDoctor {
         const video = document.getElementById('camera-feed');
         const canvas = document.getElementById('camera-canvas');
         const context = canvas.getContext('2d');
-        
+        if (!video.videoWidth || !video.videoHeight) {
+            this.showToast('Camera not ready. Please try again.', 'error');
+            return;
+        }
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0);
-        
         canvas.toBlob((blob) => {
+            // Reset analysis steps and progress bar
+            this.resetAnalysisUI();
             this.processImage(blob);
         }, 'image/jpeg', 0.8);
-        
         this.closeCamera();
     }
 
@@ -168,9 +171,25 @@ class PlantDoctor {
         const reader = new FileReader();
         reader.onload = (e) => {
             this.currentImage = e.target.result;
+            // Reset analysis steps and progress bar
+            this.resetAnalysisUI();
             this.startAnalysis();
         };
         reader.readAsDataURL(file);
+    }
+
+    resetAnalysisUI() {
+        // Reset analysis steps
+        const steps = document.querySelectorAll('.step');
+        steps.forEach((step, idx) => {
+            step.classList.remove('active', 'completed');
+            if (idx === 0) step.classList.add('active');
+        });
+        // Reset progress bar
+        const progressFill = document.getElementById('progress-fill');
+        if (progressFill) progressFill.style.width = '0%';
+        const progressText = document.getElementById('progress-text');
+        if (progressText) progressText.textContent = 'Processing...';
     }
 
     startAnalysis() {
