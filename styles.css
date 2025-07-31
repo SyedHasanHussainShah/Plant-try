@@ -1,1 +1,212 @@
-@import url('https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css');
+/* PlantDoctor - Beautiful Custom CSS */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  color: #718096;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.upload-section {
+  margin-bottom: 30px;
+}
+
+.upload-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.upload-label {
+  display: block;
+  color: #4a5568;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.file-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed #cbd5e0;
+  border-radius: 12px;
+  background: #f7fafc;
+  color: #4a5568;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.file-input:hover {
+  border-color: #667eea;
+  background: #edf2f7;
+}
+
+.file-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  width: 100%;
+  margin-top: 10px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.preview {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.preview img {
+  max-height: 200px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: 3px solid white;
+}
+
+.results {
+  background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+  border-radius: 15px;
+  padding: 25px;
+  margin-top: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(72, 187, 120, 0.2);
+  display: none;
+}
+
+.results.show {
+  display: block;
+  animation: slideIn 0.5s ease-out;
+}
+
+.results h2 {
+  color: #2f855a;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.result-item {
+  margin-bottom: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.plant-name {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+.disease {
+  color: #e53e3e;
+  font-weight: 500;
+}
+
+.suggestion {
+  color: #38a169;
+  line-height: 1.5;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading animation */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .container {
+    padding: 25px;
+    margin: 10px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+}

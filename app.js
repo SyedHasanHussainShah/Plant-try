@@ -14,7 +14,7 @@ let selectedFile = null;
 function showPreview(file) {
   const reader = new FileReader();
   reader.onload = function (e) {
-    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" class="max-h-48 rounded-lg shadow-md" />`;
+    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" />`;
   };
   reader.readAsDataURL(file);
 }
@@ -25,7 +25,7 @@ function handleFileInput(e) {
     selectedFile = file;
     showPreview(file);
     submitBtn.disabled = false;
-    results.classList.add('hidden');
+    results.classList.remove('show');
   }
 }
 
@@ -34,9 +34,10 @@ cameraCapture.addEventListener('change', handleFileInput);
 
 submitBtn.addEventListener('click', async () => {
   if (!selectedFile) return;
+  
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Analyzing...';
-  results.classList.add('hidden');
+  submitBtn.innerHTML = '<span class="loading"></span> Analyzing...';
+  results.classList.remove('show');
 
   const formData = new FormData();
   formData.append('image', selectedFile);
@@ -46,17 +47,19 @@ submitBtn.addEventListener('click', async () => {
       method: 'POST',
       body: formData,
     });
+    
     if (!response.ok) throw new Error('Failed to analyze image');
+    
     const data = await response.json();
     plantName.textContent = `Plant: ${data.plant_name || 'Unknown'}`;
     disease.textContent = data.disease ? `Disease: ${data.disease}` : 'No disease detected';
     suggestion.textContent = data.suggestion || '';
-    results.classList.remove('hidden');
+    results.classList.add('show');
   } catch (err) {
     plantName.textContent = '';
-    disease.textContent = 'Error analyzing image.';
+    disease.textContent = 'Error analyzing image. Please try again.';
     suggestion.textContent = '';
-    results.classList.remove('hidden');
+    results.classList.add('show');
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = 'Submit';
