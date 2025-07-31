@@ -242,16 +242,15 @@ class PlantDoctor {
     showResults() {
         // Hide analysis section
         document.getElementById('analysis-section').classList.add('hidden');
-        
+        // Show upload area for next scan
+        document.getElementById('upload-area').classList.remove('hidden');
         // Generate mock results
         const results = this.generateMockResults();
-        
         // Update results UI
         document.getElementById('result-image').src = this.currentImage;
         document.getElementById('plant-name').textContent = results.plantName;
         document.getElementById('plant-scientific').textContent = results.scientificName;
         document.getElementById('confidence-score').textContent = `${results.confidence}%`;
-        
         // Update diagnosis
         const diagnosisContent = document.getElementById('diagnosis-content');
         diagnosisContent.innerHTML = results.diagnosis.map(item => `
@@ -260,7 +259,6 @@ class PlantDoctor {
                 <p>${item.description}</p>
             </div>
         `).join('');
-        
         // Update prescription
         const prescriptionContent = document.getElementById('prescription-content');
         prescriptionContent.innerHTML = results.prescription.map(item => `
@@ -269,8 +267,7 @@ class PlantDoctor {
                 <p>${item.description}</p>
             </div>
         `).join('');
-        
-        // Show results section
+        // Always show results section
         this.navigateToSection('results');
     }
 
@@ -282,25 +279,26 @@ class PlantDoctor {
             { name: 'Peace Lily', scientific: 'Spathiphyllum sp.', confidence: 90 },
             { name: 'Pothos', scientific: 'Epipremnum aureum', confidence: 87 }
         ];
-        
         const diseases = [
             { title: 'Leaf Spot Disease', icon: 'fa-bug', description: 'Small brown spots on leaves indicating fungal infection.' },
             { title: 'Powdery Mildew', icon: 'fa-snowflake', description: 'White powdery substance on leaves and stems.' },
             { title: 'Root Rot', icon: 'fa-water', description: 'Yellowing leaves and mushy roots due to overwatering.' },
             { title: 'Spider Mites', icon: 'fa-spider', description: 'Tiny pests causing yellow spots and webbing.' }
         ];
-        
         const treatments = [
             { title: 'Remove Affected Leaves', icon: 'fa-cut', description: 'Carefully remove and dispose of infected leaves to prevent spread.' },
             { title: 'Apply Neem Oil', icon: 'fa-tint', description: 'Spray neem oil solution weekly to treat fungal and pest issues.' },
             { title: 'Improve Air Circulation', icon: 'fa-wind', description: 'Ensure proper spacing and ventilation to prevent disease.' },
             { title: 'Adjust Watering', icon: 'fa-tint', description: 'Water only when soil is dry to prevent root rot.' }
         ];
-        
         const randomPlant = plants[Math.floor(Math.random() * plants.length)];
-        const randomDiseases = diseases.slice(0, Math.floor(Math.random() * 2) + 1);
-        const randomTreatments = treatments.slice(0, Math.floor(Math.random() * 3) + 2);
-        
+        // Always at least one disease and two treatments
+        const diseaseCount = Math.floor(Math.random() * 2) + 1;
+        const treatmentCount = Math.floor(Math.random() * 2) + 2;
+        const shuffledDiseases = diseases.sort(() => 0.5 - Math.random());
+        const shuffledTreatments = treatments.sort(() => 0.5 - Math.random());
+        const randomDiseases = shuffledDiseases.slice(0, diseaseCount);
+        const randomTreatments = shuffledTreatments.slice(0, treatmentCount);
         return {
             plantName: randomPlant.name,
             scientificName: randomPlant.scientific,
