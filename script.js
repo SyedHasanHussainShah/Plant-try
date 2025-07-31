@@ -167,6 +167,7 @@ class PlantDoctor {
     }
 
     processImage(file) {
+        alert('Processing image!'); // DEBUG: Confirm this function is called
         // Create a preview URL
         const reader = new FileReader();
         reader.onload = (e) => {
