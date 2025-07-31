@@ -5,32 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlantDoctor - AI Plant Disease Detector</title>
   <link href="./styles.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1 class="title">🌱 PlantDoctor</h1>
-    <p class="subtitle">Upload or capture a photo of your plant. Our AI will identify the plant, detect diseases, and give you care suggestions!</p>
+    <div class="header">
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+      </div>
+      <h1 class="title">PlantDoctor</h1>
+      <p class="subtitle">Your AI-powered plant health assistant</p>
+    </div>
     
     <div class="upload-section">
-      <div class="upload-group">
-        <label class="upload-label">Upload Image</label>
-        <input type="file" accept="image/*" id="imageUpload" class="file-input" />
-      </div>
-      
-      <div class="upload-group">
-        <label class="upload-label">Or Capture from Camera</label>
-        <input type="file" accept="image/*" capture="environment" id="cameraCapture" class="file-input" />
+      <div class="upload-cards">
+        <div class="upload-card" onclick="document.getElementById('imageUpload').click()">
+          <div class="card-icon">
+            <i class="fas fa-upload"></i>
+          </div>
+          <h3>Upload Image</h3>
+          <p>Choose from your gallery</p>
+          <input type="file" accept="image/*" id="imageUpload" class="hidden-input" />
+        </div>
+        
+        <div class="upload-card" onclick="openCamera()">
+          <div class="card-icon">
+            <i class="fas fa-camera"></i>
+          </div>
+          <h3>Take Photo</h3>
+          <p>Capture with camera</p>
+        </div>
       </div>
       
       <button id="submitBtn" class="submit-btn" disabled>
-        Submit
+        <i class="fas fa-search"></i>
+        <span>Analyze Plant</span>
       </button>
     </div>
     
     <div id="preview" class="preview"></div>
     
     <div id="results" class="results">
-      <h2>Results</h2>
+      <div class="results-header">
+        <i class="fas fa-clipboard-list"></i>
+        <h2>Analysis Results</h2>
+      </div>
       <div id="plantName" class="result-item plant-name"></div>
       <div id="disease" class="result-item disease"></div>
       <div id="suggestion" class="result-item suggestion"></div>
